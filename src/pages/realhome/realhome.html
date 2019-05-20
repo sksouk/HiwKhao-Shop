@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+   Chưa giao hàng
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding style="background:url(assets/bg2.png) no-repeat center;background-size:cover;" id="page1">
+  <ion-list id="lIST-list2">
+   <!-- <ion-item color="none" id="lIST-list-item15" *ngFor="let item of items" (click)="openoder2(item)">
+      <ion-icon name="paper" item-left></ion-icon>
+      <h2><b>Ten khach : {{item.id}}.{{item.khach}}</b></h2>
+      <h3>Dia chi : {{item.diachi}}</h3>
+    </ion-item>-->
+    <section ng-repeat="card in cards" 
+      class="card theme-orange"
+      data-color="#F7AA17"  *ngFor="let item of items" (click)="openoder2(item)">
+      <div class="card__map">
+        <div class="card__map__inner"></div>
+      </div>
+      <section class="card__part card__part-2">
+        <div class="card__part__side m--back">
+        <div class="card__part__inner card__face">
+        <div class="card__face__colored-side"></div>
+        <h3 class="card__face__price">{{item.pttt}}</h3>
+        <div class="card__face__divider"></div>
+        <div class="card__face__path"></div>
+        <div class="card__face__from-to">
+          <h5><b>{{item.diachi}}</b></h5>
+          <p>{{item.date}}</p>
+        </div>
+       
+        <div class="card__face__stats card__face__stats--req">
+          Price
+          <p>{{item.tongtien}} Đ</p>
+        </div>
+        <div class="card__face__stats card__face__stats--pledge">
+          khách
+          <p>{{item.khach}}</p>
+        </div>
+       
+        </div>
+        </div>
+    </section>
+  </section>
+  </ion-list>
+</ion-content>

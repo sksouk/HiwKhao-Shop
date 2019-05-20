@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Order Of {{khach}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding style="background:url(assets/bg2.png) no-repeat center;background-size:cover;"  id="page1">
+  <ion-list id="oRDER-list2">
+    <ion-item color="none" id="oRDER-list-item15">
+      <ion-icon name="paper" item-left></ion-icon>
+      <ion-note item-right></ion-note>
+     Tên khách: <b>{{khach}}</b>
+    </ion-item>
+    <ion-item color="none" id="oRDER-list-item22">
+      <ion-icon name="home" item-left></ion-icon>
+      <ion-note item-right></ion-note>
+      Địa chỉ: <b>{{diachi}}</b>
+    </ion-item>
+    <ion-item color="none" id="oRDER-list-item20" *ngFor="let item of items">
+      <ion-thumbnail item-left>
+        <img src="{{item.image}}" />
+      </ion-thumbnail>
+      <h2><b>{{item.menu_name}}</b></h2>
+      <h3>Số lượng: <b>{{item.quantity}}</b> | Total: <b style="color:red">{{item.price}}</b></h3>
+      <h3>Note : <b>{{item.description}}</b></h3>
+    </ion-item>
+    <ion-item color="none" id="oRDER-list-item17" *ngFor="let item of items2">
+      <ion-icon name="calculator" item-left></ion-icon>
+      <h3>Tổng tiền : <b>{{item.total}}</b></h3>
+    </ion-item>
+  
+  </ion-list>
+  <div *ngIf="status == 0">
+    <button id="oRDER-button1" ion-button color="assertive" block style="font-weight:600;font-size:20px;" (click)="confirm()">
+      Finished
+    </button>
+    <button id="oRDER-button1" ion-button  block style="font-weight:600;font-size:20px;background-color:#d01737" (click)="cancel()">
+      Cancel
+    </button>
+  </div>
+</ion-content>

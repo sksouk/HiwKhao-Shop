@@ -1,0 +1,29 @@
+<div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
+  <div class="flb">
+    <div class="Aligner-item Aligner-item--top"></div>
+    <img src="assets/logo_shop.png">
+    <div class="Aligner-item Aligner-item--bottom"></div>
+  </div>
+</div><ion-header>
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding style="background:url(assets/img/6jsyUrirSCcX5bUutnR5_bg1.png) no-repeat center;background-size:cover;" id="page1">
+ 
+  <img src="assets/img/0zKCukpdRiPKgY8eNoGC_logos.png" style="display:block;width:40%;height:auto;margin-left:auto;margin-right:auto;" />
+  <form id="page1-form4">
+    
+    <ion-item id="page1-input2">
+      <ion-label></ion-label>
+      <ion-input  round type="text" placeholder="Username" name="username" #username></ion-input>
+    </ion-item>
+    <ion-item id="page1-input3">
+      <ion-label></ion-label>
+        <ion-input type="password" placeholder="Password" name="password" #password></ion-input>
+    </ion-item>
+    <button id="page1-button1"  ion-button color="#d01737" block style="font-weight:600;background-color:#d01737"(click)="signIn()">
+      LOGIN
+    </button>
+  </form>
+</ion-content>
