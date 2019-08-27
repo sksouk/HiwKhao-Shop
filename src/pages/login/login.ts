@@ -6,6 +6,7 @@ import { LoadingController } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 import { RealhomePage } from '../realhome/realhome';
 import { TabPage } from '../tab/tab';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -20,7 +21,7 @@ export class LoginPage {
   tabBarElement: any;
   splash = true;
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController, private http: Http, public loading: LoadingController) {
+  constructor(private storage: Storage, public navCtrl: NavController, public alertCtrl: AlertController, private http: Http, public loading: LoadingController) {
     
   }
   ionViewDidLoad() {
@@ -29,6 +30,19 @@ export class LoginPage {
   
   }
 
+  ionViewDidEnter(){
+    this.storage.get('username').then((val) => {
+      console.log('Your username is1'+val);
+      if(val != null){
+        let a = { username:val};
+        this.navCtrl.push(TabPage,a);
+      }
+      else
+      {
+        
+      }
+    });
+  }
   signIn() {
 
     //// check to confirm the username and password fields are filled
@@ -82,7 +96,9 @@ export class LoginPage {
             console.log(res)
             loader.dismiss()
             if (res == "Your Login success") {
-
+              this.storage.set("username", this.username.value);
+              console.log('Your username is', this.username.value);
+  
               /*let alert = this.alertCtrl.create({
                 title: "CONGRATS",
                 subTitle: (res),
@@ -90,7 +106,7 @@ export class LoginPage {
               });
 
               alert.present();*/
-              this.navCtrl.push(TabPage, data);
+              this.navCtrl.push(TabPage);
 
             } else {
               let alert = this.alertCtrl.create({

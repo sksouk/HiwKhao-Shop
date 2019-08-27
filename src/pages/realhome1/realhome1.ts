@@ -5,7 +5,7 @@ import { from } from 'rxjs/observable/from';
 import { HomePage } from '../home/home';
 import { Http, Headers, RequestOptions } from "@angular/http";
 import { FCM } from '@ionic-native/fcm';
-
+import { Storage } from '@ionic/storage';
 import { AngularFireDatabase} from 'angularfire2/database';
 import * as firebase from 'firebase';
 import { LoadingController } from 'ionic-angular';
@@ -33,12 +33,14 @@ export class Realhome1Page {
   username:any;
   khach:any;
   diachi:any;
-  constructor(public fbd:AngularFireDatabase,private fcm1: FCM,private auth:AngularFireAuth,public navCtrl: NavController, public navParams: NavParams,private http: Http,public loading: LoadingController) {
+  itemtotal:any;
+  constructor(private storage: Storage,public fbd:AngularFireDatabase,private fcm1: FCM,private auth:AngularFireAuth,public navCtrl: NavController, public navParams: NavParams,private http: Http,public loading: LoadingController) {
   }
 logout(){
   this.auth.auth.signOut();
 }
   ionViewDidLoad() {
+   
     this.username=this.navParams.get('username');
     this.auth.auth.onAuthStateChanged(user=> {
       
@@ -62,10 +64,6 @@ logout(){
     })
     });
   
-   this.fcm1.onNotification().subscribe(data => {
-      alert("co ngoui dat hang");
-      console.log(data);
-    });
    // this.fbd.list("/test").update("test");
     //firebase.database().ref('/path').child(this.test).child('token').set(this.fcm1.getToken().then(token=>{this.test1=token}));
    // firebase.database().ref('/path').child(this.test).set('test');
@@ -74,7 +72,6 @@ logout(){
   openoder2(item)
   {
 
-    this.username = this.navParams.get('username');
     let data={
       username:this.username,
       khach:item.khach,
@@ -87,7 +84,6 @@ logout(){
     this.navCtrl.push(Order2Page,data);
   }
   ionViewDidEnter(){
-    this.username = this.navParams.get('username');
     var headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json');
@@ -107,11 +103,17 @@ logout(){
       this.http.post('http://hoctiengviet.net/food_order/ionicphp/fetch_order3.php', data, options)
         .map(res => res.json())
         .subscribe(res => {
-
-          loader.dismiss()
           this.items = res.server_response;
-
           console.log(this.items);
+          loader.present().then(() => {
+            this.http.post('http://hoctiengviet.net/food_order/ionicphp/totaltoday.php', data, options)
+              .map(res => res.json())
+              .subscribe(res => {
+                this.itemtotal = res.server_response;
+                console.log(this.itemtotal);
+              });
+            });
+          loader.dismiss()
         });
     });
   }

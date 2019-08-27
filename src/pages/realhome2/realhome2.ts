@@ -6,6 +6,7 @@ import { HomePage } from '../home/home';
 import { Http, Headers, RequestOptions } from "@angular/http";
 import { FCM } from '@ionic-native/fcm';
 
+import { Storage } from '@ionic/storage';
 import { AngularFireDatabase} from 'angularfire2/database';
 import * as firebase from 'firebase';
 import { LoadingController } from 'ionic-angular';
@@ -33,12 +34,13 @@ export class Realhome2Page {
   username:any;
   khach:any;
   diachi:any;
-  constructor(public fbd:AngularFireDatabase,private fcm1: FCM,private auth:AngularFireAuth,public navCtrl: NavController, public navParams: NavParams,private http: Http,public loading: LoadingController) {
+  constructor(private storage: Storage,public fbd:AngularFireDatabase,private fcm1: FCM,private auth:AngularFireAuth,public navCtrl: NavController, public navParams: NavParams,private http: Http,public loading: LoadingController) {
   }
-logout(){
-  this.auth.auth.signOut();
-}
+  logout(){
+    this.auth.auth.signOut();
+  }
   ionViewDidLoad() {
+
     this.username=this.navParams.get('username');
     this.auth.auth.onAuthStateChanged(user=> {
       
@@ -63,7 +65,7 @@ logout(){
     });
   
    this.fcm1.onNotification().subscribe(data => {
-      alert("co ngoui dat hang");
+      alert(" dat hang");
       console.log(data);
     });
    // this.fbd.list("/test").update("test");
@@ -73,8 +75,6 @@ logout(){
   }
   openoder2(item)
   {
-
-    this.username = this.navParams.get('username');
     let data={
       username:this.username,
       khach:item.khach,
@@ -88,17 +88,14 @@ logout(){
     this.navCtrl.push(Order2Page,data);
   }
   ionViewDidEnter(){
-    this.username = this.navParams.get('username');
     var headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({
       headers: headers
     });
-
     let data = {
       username: this.username,
-      
     };
 
     let loader = this.loading.create({

@@ -6,6 +6,7 @@ import { Realhome1Page } from '../realhome1/realhome1';
 import { Realhome2Page } from '../realhome2/realhome2';
 import { Realhome3Page } from '../realhome3/realhome3';
 import { Realhome4Page } from '../realhome4/realhome4';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the TabPage tabs.
@@ -20,10 +21,10 @@ import { Realhome4Page } from '../realhome4/realhome4';
   templateUrl: 'tab.html'
 })
 export class TabPage {
+username:string;
 
-
-
-  constructor(public navCtrl: NavController,public navParams:NavParams) {
+userquan:any;
+  constructor(private storage: Storage, public navCtrl: NavController,public navParams:NavParams) {
 
   }
   tab1param = {username:this.navParams.get('username')};

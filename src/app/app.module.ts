@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { FIREBASE_CONFIG } from './app.firebase.config';
 import { AngularFireAuthModule, AngularFireAuth} from 'angularfire2/auth';
 import { auth } from 'firebase';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { FCM } from '@ionic-native/fcm';
 import { RealhomePage } from '../pages/realhome/realhome';
@@ -47,7 +48,8 @@ import { Realhome4Page } from '../pages/realhome4/realhome4';
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

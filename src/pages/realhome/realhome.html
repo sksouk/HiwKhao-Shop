@@ -1,11 +1,21 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
+    <ion-title style="float: left;">
    Chưa giao hàng
     </ion-title>
+    <div *ngFor="let item1 of item" style="float: right;">
+      <button (click)="closequan()" *ngIf="item1.status > 0" style="border-radius: 25px; width: 110px; height: 30px; background-color: #f2f2f2; color: black; border-color: #00ff00; border: 2px solid #00ff00; font-weight: bold;">Đóng quán</button>
+      <button (click)="openquan()" *ngIf="item1.status == 0" style="border-radius: 25px; width: 110px; height: 30px; background-color: #00ff00; color: black; border-color: #00ff00; border: 2px solid #00ff00; font-weight: bold;">Mở quán</button>
+    </div>
   </ion-navbar>
 </ion-header>
 <ion-content padding style="background:url(assets/bg2.png) no-repeat center;background-size:cover;" id="page1">
+  <!-- Refresher -->
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="bubbles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-list id="lIST-list2">
    <!-- <ion-item color="none" id="lIST-list-item15" *ngFor="let item of items" (click)="openoder2(item)">
       <ion-icon name="paper" item-left></ion-icon>
