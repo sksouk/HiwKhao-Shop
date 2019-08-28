@@ -167,7 +167,7 @@ doRefresh(event){
   ionViewWillEnter() {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
-  
+  //fgfh
     this.username=this.navParams.get('username');
     var headers = new Headers();
     headers.append("Accept", 'application/json');
